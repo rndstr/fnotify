@@ -44,8 +44,8 @@ $VERSION = '0.1.0';
 
 sub pub_msg {
   my ($server,$msg,$nick,$address,$target) = @_;
-  if (Irssi::settings_get_bool('fnotify_public') &&
-        ' '.Irssi::settings_get_str('fnotify_public_channels').' ' =~ m/[, ]+$target[, ]+/i) {
+  $_ =  ' '.Irssi::settings_get_str('fnotify_public_channels').' ';
+  if (Irssi::settings_get_bool('fnotify_public') and m/[, ]+$target[, ]+/i) {
       filewrite($target.' <'.$nick.'> '.$msg);
   }
 }
